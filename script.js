@@ -1,9 +1,22 @@
+//initialize output
 let display = document.getElementById("output");
+
+//define variables
 let displayString = [];
 let newDisplayString = [];
+let calcComplete
 
-function operate() {  
+//create function that will compile input and compute output
+function operate() {
+    //check to make sure than the input is valid
+    if((displayString[0] === "+") || (displayString[0] === "-") || (displayString[0] === "x") || (displayString[0] === "/") || (displayString[displayString.length] === "+") || (displayString[displayString.length] === "-") || (displayString[displayString.length] === "x") || (displayString[displayString.length] === "/")) {
+        clearCalc();
+        alert("Your input contains an operator at the beginning or end, your calculator has been cleared to avoid an error!")
+    } 
+    else{
 
+    //compile input string into longer digits and operators
+    //["5", "6", "+", "3", "2"] becomes --> ["56", "+", "32"]
     for(i=0; i <= displayString.length;) {
         if((displayString[i] !== "+") && (displayString[i] !== "-") && (displayString[i] !== "x") && (displayString[i] !== "/") && (displayString[i+1] !== "+") && (displayString[i+1] !== "-") && (displayString[i+1] !== "x") && (displayString[i+1] !== "/") && (i+1 < displayString.length)) {
             let item = displayString[i]+displayString[i+1];
@@ -13,10 +26,8 @@ function operate() {
             i++;
        }
     }
-
-    console.log(displayString);
     
-    
+    //parse through array, multiply and divide as needed
     for(i=0; i <= displayString.length; i++) {
         if(displayString[i] === "x") {
             let newVal = multiply(displayString[i-1],displayString[i+1]);
@@ -31,6 +42,7 @@ function operate() {
         }
     }
 
+    //parse through array, add and subtract as needed
     for(i=0; i <= displayString.length; i++) {
         if(displayString[i] === "+") {
             let newVal = add(parseInt(displayString[i-1], 10),parseInt(displayString[i+1], 10));
@@ -44,7 +56,17 @@ function operate() {
     
         }
     }
+    }
     display.innerHTML = displayString;
+    calcComplete = 1;
+}
+
+//function to erase previous output when a new command is being input
+function wipe() {
+    if(calcComplete === 1){
+        displayString = [];
+        calcComplete = 0;
+    }
 }
 
 function add(a, b) {
@@ -63,6 +85,7 @@ function divide(a, b) {
     return a / b;
 }
 
+//function to monitor character limit of 14
 function charCheck() {
     if(displayString.length >= 14) {
         clearCalc();
@@ -70,7 +93,9 @@ function charCheck() {
     }
 }
 
+//functions to save and display numbers 0-9
 function display9() {
+    wipe();
     displayString.push("9");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -78,6 +103,7 @@ function display9() {
 }
 
 function display8() {
+    wipe();
     displayString.push("8");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -85,6 +111,7 @@ function display8() {
 }
 
 function display7() {
+    wipe();
     displayString.push("7");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -92,6 +119,7 @@ function display7() {
 }
 
 function display6() {
+    wipe();
     displayString.push("6");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -99,6 +127,7 @@ function display6() {
 }
 
 function display5() {
+    wipe();
     displayString.push("5");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -106,6 +135,7 @@ function display5() {
 }
 
 function display4() {
+    wipe();
     displayString.push("4");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -113,6 +143,7 @@ function display4() {
 }
 
 function display3() {
+    wipe();
     displayString.push("3");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -120,6 +151,7 @@ function display3() {
 }
 
 function display2() {
+    wipe();
     displayString.push("2");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -127,6 +159,7 @@ function display2() {
 }
 
 function display1() {
+    wipe();
     displayString.push("1");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -134,13 +167,16 @@ function display1() {
 }
 
 function display0() {
+    wipe();
     displayString.push("0");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
     charCheck();
 }
 
+//functions to display operators
 function displayAdd() {
+    wipe();
     displayString.push("+");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -148,6 +184,7 @@ function displayAdd() {
 }
 
 function displaySub() {
+    wipe();
     displayString.push("-");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -155,6 +192,7 @@ function displaySub() {
 }
 
 function displayMult() {
+    wipe();
     displayString.push("x");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
@@ -162,17 +200,20 @@ function displayMult() {
 }
 
 function displayDiv() {
+    wipe();
     displayString.push("/");
     newDisplayString = displayString.join(" ");
     display.innerHTML = newDisplayString;
     charCheck();
 }
 
+//function to clear display
 function clearCalc() {
     displayString = [];
     display.innerHTML = displayString;
 }
 
+//event listners for each button
 const btn9 = document.querySelector('#nine');
 btn9.addEventListener('click', () => {
     display9();
