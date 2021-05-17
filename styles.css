@@ -1,0 +1,77 @@
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.number{ 
+    border: 2px solid black;
+    border-radius: 100%;
+    height: 75px;
+    width: 75px;
+    text-align: center;
+    box-shadow: 0 5px #999;
+    font-size: 25px;
+}
+
+.number:hover {background-color: #838383}
+
+.number:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(2px);
+}
+
+.operator{
+    border: 2px solid black;
+    height: 75px;
+    width: 75px;
+    text-align: center;
+    box-shadow: 0 5px rgb(197, 0, 0);
+    border-radius: 15px;
+    background-color: red;
+    font-size: 25px;
+}
+
+.operator:hover {background-color: rgb(197, 0, 0)}
+
+.operator:active {
+  box-shadow: 0 5px rgb(197, 0, 0);
+  transform: translateY(2px);
+}
+
+#output {
+    font-size: 30px;
+    margin-left: 15px;
+}
+
+#center {
+    display: flex;
+    justify-content: center;
+}
+
+#screen{
+    margin-top: 50px;
+    height: 150px;
+    width: 525px;
+    background-color: rgb(135, 150, 135);
+    border: 2px solid black;
+    border-radius: 25px;
+    display: flex;
+    justify-content: left;
+    align-items: center
+}
+
+#calcContain {
+    display: grid;
+    justify-content: center;
+    border: 5px solid black;
+    width: 675px;
+    border-radius: 50px;
+    background-color: rgb(42, 73, 133);
+}
+
+#container {
+    margin-top: 75px;
+    margin-bottom: 75px;
+    display: grid;
+    gap: 75px;
+    grid-template-columns: 75px 75px 75px 75px;
+}
